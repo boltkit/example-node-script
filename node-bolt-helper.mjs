@@ -35,6 +35,7 @@ const getPipelineArg = (name) => {
  */
 const getJobResultJson = (jobId) => {
   const resultFilename = process.env[`__JOB_${jobId}_RESULT_FILE__`];
+  console.log(resultFilename);
   if (resultFilename) {
     let content = null;
 
@@ -42,6 +43,7 @@ const getJobResultJson = (jobId) => {
     try {
       content = fs.readFileSync(resultFilename); 
     } catch (err) {
+      console.log(err);
       return null;
     }
 
@@ -49,6 +51,7 @@ const getJobResultJson = (jobId) => {
     try {
       return JSON.parse(content);
     } catch (err) {
+      console.log(err);
       // can't parse, not a json
       return content;
     }
