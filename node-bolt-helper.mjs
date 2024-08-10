@@ -7,6 +7,7 @@
     setJobResult(...)
 */
 
+import fs from 'node:fs'; 
 
 /**
  * Returns all pipeline arguments
