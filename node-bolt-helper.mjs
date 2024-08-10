@@ -1,18 +1,10 @@
-
-/*
-  // rerun: run copy  (see how to run specific version ??? or fuck ???)
-  // make better errors
-  // before_script
-  // prometheus exporter
-*/
-
 /*
   USAGE
-    bolth = require('bolt-pipeline-helper');
+    import {getJobResult, getPipelineArg, getJobResultJson, setJobResult} from "./node-bolt-helper.mjs";
 
-    bolth.getJobResult(0, default value)
-    bolth.getPipelineArg(BOLT_ARG_CHANGE_DATA, default value)
-    bolth.setJobResult(...)
+    getJobResult(0, default value)
+    getPipelineArg(BOLT_ARG_CHANGE_DATA, default value)
+    setJobResult(...)
 */
 
 
@@ -41,14 +33,24 @@ const getPipelineArg = (name) => {
 /**
  * Attempts to parse previous job result and return it as Object, String or null if not found
  */
-const getJobResult = (jobId) => {
-  const raw = process.env[`__JOB_${jobId}_RESULT_FILE__`];
-  if (raw) {
+const getJobResultJson = (jobId) => {
+  const resultFilename = process.env[`__JOB_${jobId}_RESULT_FILE__`];
+  if (resultFilename) {
+    let content = null;
+
+    // try to read the result file
     try {
-      return JSON.parse(raw);
+      content = fs.readFileSync(resultFilename); 
+    } catch (err) {
+      return null;
+    }
+
+    // try to parse it
+    try {
+      return JSON.parse(content);
     } catch (err) {
       // can't parse, not a json
-      return raw;
+      return content;
     }
   }
   return null;
@@ -68,6 +70,4 @@ const setJobResult = (res) => {
   
 };
 
-
-
-export { getPipelineArg, getJobResult, setJobResult };
+export { getPipelineArg, getJobResultJson, setJobResult };
