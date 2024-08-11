@@ -42,7 +42,7 @@ const getJobResultJson = (jobId) => {
 
     // try to read the result file
     try {
-      content = fs.readFileSync(resultFilename); 
+      content = fs.readFileSync(resultFilename, 'utf8'); 
     } catch (err) {
       console.log(err);
       return null;
@@ -68,9 +68,9 @@ const getJobResultJson = (jobId) => {
 const setJobResult = (res) => {
   if (process.env.__JOB_RESULT_FILE__) {
     if (typeof res === "object") {
-      fs.writeFileSync(process.env.__JOB_RESULT_FILE__, JSON.stringify(res)); 
+      fs.writeFileSync(process.env.__JOB_RESULT_FILE__, JSON.stringify(res), { encoding: "utf8" }); 
     } else {
-      fs.writeFileSync(process.env.__JOB_RESULT_FILE__, res);
+      fs.writeFileSync(process.env.__JOB_RESULT_FILE__, res, { encoding: "utf8" });
     }
   }
 };
