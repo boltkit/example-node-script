@@ -1,4 +1,4 @@
-import {setJobResult} from "./node-bolt-helper.mjs";
+import {setJobResult} from "@boltkit/bolt-helper-node";
 
 const res = await fetch("https://random-data-api.com/api/color/random_color");
 if (!res.ok) {

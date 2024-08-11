@@ -1,4 +1,4 @@
-import {setJobResult} from "./node-bolt-helper.mjs";
+import {setJobResult} from "@boltkit/bolt-helper-node";
 
 const res = await fetch("https://timeapi.io/api/Time/current/zone?timeZone=Europe/Amsterdam");
 if (!res.ok) {

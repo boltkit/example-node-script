@@ -1,4 +1,4 @@
-import {getJobResultJson} from "./node-bolt-helper.mjs"
+import {getJobResultJson} from "@boltkit/bolt-helper-node";
 
 const color = getJobResultJson(0)
 const temp = getJobResultJson(1)
