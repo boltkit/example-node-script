@@ -36,8 +36,8 @@ const getPipelineArg = (name) => {
  */
 const getJobResultJson = (jobId) => {
   const resultFilename = process.env[`__JOB_${jobId}_RESULT_FILE__`];
-  console.log(resultFilename);
   if (resultFilename) {
+    console.log(`job result file = ${resultFilename}`);
     let content = null;
 
     // try to read the result file
@@ -66,12 +66,13 @@ const getJobResultJson = (jobId) => {
  * @param {Object|String} res
  */
 const setJobResult = (res) => {
-  if (typeof res === "object") {
-    fs.writeFileSync(process.env.__JOB_RESULT_FILE__, JSON.stringify(res)); 
-  } else {
-    fs.writeFileSync(process.env.__JOB_RESULT_FILE__, res);
+  if (process.env.__JOB_RESULT_FILE__) {
+    if (typeof res === "object") {
+      fs.writeFileSync(process.env.__JOB_RESULT_FILE__, JSON.stringify(res)); 
+    } else {
+      fs.writeFileSync(process.env.__JOB_RESULT_FILE__, res);
+    }
   }
-  
 };
 
 export { getPipelineArg, getJobResultJson, setJobResult };
