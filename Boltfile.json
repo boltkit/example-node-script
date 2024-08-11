@@ -1,0 +1,32 @@
+meta:
+  name: Example node
+  slug: example-node
+  description: An example of nodejs workload
+beforeJob:
+  script:
+    - bin: git
+      opts:
+        - clone
+        - https://github.com/boltkit/example-node-script.git
+        - .
+jobs:
+  - name: Get color 0
+    script:
+      - bin: node
+        opts:
+          - job_0_run.mjs
+  - name: Get color 1
+    script:
+      - bin: node
+        opts:
+          - job_1_run.mjs
+  - name: Get color 2
+    script:
+      - bin: node
+        opts:
+          - job_2_run.mjs
+  - name: Show colors
+    script:
+      - bin: node
+        opts:
+          - job_3_run.mjs
