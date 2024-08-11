@@ -52,7 +52,6 @@ const getJobResultJson = (jobId) => {
     try {
       return JSON.parse(content);
     } catch (err) {
-      console.log(err);
       // can't parse, not a json
       return content;
     }
