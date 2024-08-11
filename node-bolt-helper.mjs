@@ -69,7 +69,7 @@ const setJobResult = (res) => {
     if (typeof res === "object") {
       fs.writeFileSync(process.env.__JOB_RESULT_FILE__, JSON.stringify(res), { encoding: "utf8" }); 
     } else {
-      fs.writeFileSync(process.env.__JOB_RESULT_FILE__, res, { encoding: "utf8" });
+      fs.writeFileSync(process.env.__JOB_RESULT_FILE__, res);
     }
   }
 };
