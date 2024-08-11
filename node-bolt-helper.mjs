@@ -66,10 +66,11 @@ const getJobResultJson = (jobId) => {
  */
 const setJobResult = (res) => {
   if (process.env.__JOB_RESULT_FILE__) {
-    if (typeof res === "object") {
+    if (typeof res === "object" || typeof res === "number" || typeof res === "string" || typeof res === "boolean") {
       fs.writeFileSync(process.env.__JOB_RESULT_FILE__, JSON.stringify(res), { encoding: "utf8" }); 
     } else {
-      fs.writeFileSync(process.env.__JOB_RESULT_FILE__, res);
+      // unsupported
+      //fs.writeFileSync(process.env.__JOB_RESULT_FILE__, res);
     }
   }
 };
